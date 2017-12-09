@@ -2,7 +2,9 @@
 
 This is a simple Pokémon-themed game in Python which uses the [Pokéapi](https://pokeapi.co/).
 
-There will soon be two versions of this code. There is currently game.py, which is a text-based version of the game. Eventually there will be a GUI version with sprites and buttons using Tkinter.
+There will soon be two versions of this code. There is currently game.py, which is a text-based version of the game. Eventually there will be a GUI version with sprites and buttons using Tkinter; you can see the progress in pokegui.py.
+
+The other file, pokeapi.py, contains all the classes/functions used to grab data from Pokéapi. Both versions of the game rely on this code.
 
 ## Gotta Cache 'Em All!
 
