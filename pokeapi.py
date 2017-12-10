@@ -37,7 +37,7 @@ class Pokemon:
         if randint(1, 100) > move.accuracy:
             print(self.name + " missed!")
             return
-        
+        # How much damage is done
         damage = (((((2 * self.level) / 5) + 2) * move.power * self.stats["attack"]) / (50 * opponent.stats["defense"]) + 2)
         if randint(1, 100) <= 5:
             damage = damage * 2
@@ -46,6 +46,7 @@ class Pokemon:
         if STAB:
             damage = damage * 1.5
 
+        # What happens when you have a different type
         type_effect = 1
         for element in opponent.types:
             type_effect = type_effect * type_effectiveness(move.type, element)
@@ -74,23 +75,24 @@ def cache_json(folder, name, string):
     file_name = "cache/" + folder + "/" + str(name) + ".txt"
     with open(file_name, "w") as file:
         file.write(string)
+    # w means writing the code vs r which is reading
 
 def get_data(resource, thing_id):
     # Gets the data either from the cache (if cached) or from the API and caches it.
     if is_cached(resource, thing_id):
-        # print("Getting resource " + resource + "/" + str(thing_id) + " from cache...")
+        print("Getting resource " + resource + "/" + str(thing_id) + " from cache...")
         file_name = "cache/" + resource + "/" + str(thing_id) + ".txt"
         with open(file_name) as file:
             json_string = file.read()
     else:
-        # print("Getting resource " + resource + "/" + str(thing_id) + " from API...")
+        print("Getting resource " + resource + "/" + str(thing_id) + " from API...")
         url = BASE_URL + resource + "/" + str(thing_id)
         req = Request(url, headers={"User-Agent" : "Chrome/60.0"}) # The documentation asks us to use proper headers.
         json_string = urlopen(req).read()
         json_string = json_string.decode("utf-8")
         cache_json(resource, thing_id, json_string)
 
-    json_data = json.loads(json_string)
+    json_data = json.loads(json_string) # parses JSON STRING into a dictionary Python can read.
 
     return json_data
 
@@ -120,14 +122,15 @@ def get_pokemon(pokedex_id):
 
     name = pokemon_data["name"].title()
 
-    stats_dict = {}
-
     # Get Pokemon types
     types = []
     for pokemon_type in pokemon_data["types"]:
         types.append(pokemon_type["type"]["name"])
 
     # Get stats
+
+    stats_dict = {}
+    
     for stat in pokemon_data["stats"]:
         stat_name = stat["stat"]["name"]
         stat_number = stat["base_stat"]

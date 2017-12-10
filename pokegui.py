@@ -11,8 +11,8 @@ def custom_font(font_size):
 root = Tk()
 
 canvas = Canvas(root, width = 800, height = 500)
-bg_image = PhotoImage(file = "background.gif")
-canvas.create_image((0, 0), image=bg_image, anchor="nw")
+#bg_image = PhotoImage(file = "background.gif")
+#canvas.create_image((0, 0), image=bg_image, anchor="nw")
 canvas.pack()
 
 message_box = Label(root, text="What will Ekans do?", font=custom_font(16), anchor="w", height=2, width=50, relief=SOLID, justify=LEFT, wraplength=400, borderwidth=3)
